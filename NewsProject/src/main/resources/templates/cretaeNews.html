@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>新聞新建頁面</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand"></a>
+            </div>
+            <label for="toggle-checkbox" id="toggle-label" class="visible-xs-inline-block">菜單</label>
+            <input type="checkbox" class="hidden" id="toggle-checkbox">
+            <div class="hidden-xs">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="indexAdmin">首頁</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login.html">登入</a></li>
+                    <li><a href="signup.html">註冊</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-xs-12">
+
+          <div >
+
+            <form class="row g-3 " id="testForm" action="api/News/creatOneNews" method="post">
+              <div class="col-12">
+                  <label class="form-label">標題</label>
+                  <input name="title" type="text" class="form-control" id="title" placeholder="請輸入標題" maxlength="20">
+                  <!-- <input name="title" type="text" class="form-control" id="title" placeholder="請輸入標題" value="99999"> -->
+              </div>
+              <div class="col-12">
+                  <label>類別</label>
+                  <select id="select" class="form-control" name="tag">
+                      <option>综合</option>
+                      <option>運動</option>
+                      <option>娛樂</option>
+                      <option>政治</option>
+                      <option>遊戲</option>
+                  </select>
+              </div>
+              <div class="col-12">
+                  <label class="form-label">作者</label>
+                  <input name="author" type="text" class="form-control" id="author" placeholder="請輸入作者" maxlength="10">
+              </div>
+  
+              <div class="col-12">
+                  <label class="form-label">文章內容</label>
+                  <textarea name="content" class="form-control" id="content" rows="8"></textarea>
+              </div>
+              <div class="col-12">
+                  <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck" value="1" name="releaseState">
+                      <label class="form-check-label" for="gridCheck">
+                  隱藏新聞(下架)
+                  </label>
+                  </div>
+              </div>
+              <div class="col-12">
+                  <button type="submit" class="btn btn-primary">送出</button>
+              </div>
+          </form>
+          </div>
+          
+          <div id = "newsMain">
+          </div>
+        </div>
+    </div>
+    <div class="footer">
+        2022
+    </div>
+
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+
+
+
+    </script>
+</body>
+
+</html>

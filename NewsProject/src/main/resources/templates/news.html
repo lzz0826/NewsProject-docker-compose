@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>新聞詳情</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand"></a>
+            </div>
+            <label for="toggle-checkbox" id="toggle-label" class="visible-xs-inline-block">菜單</label>
+            <input type="checkbox" class="hidden" id="toggle-checkbox">
+            <div class="hidden-xs">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index">首頁</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login.html">登入</a></li>
+                    <li><a href="signup.html">註冊</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-xs-12">
+          <div id = "newsMain">
+          </div>
+        </div>
+    </div>
+    <div class="footer">
+        2022
+    </div>
+
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+      let sseref= window.location.search.toString().split("=")[1];
+      console.log(sseref);
+
+      $(document).ready(function() {
+        $("#newsMain").empty(); // 查詢時清空前次紀錄
+        newsContent(sseref);
+      });
+      var newsContent =  function(id){
+            $.ajax({
+              url: 'api/News/search/getNewsById',
+                  type: 'post',
+                  dataType: 'json',
+                  data: {
+                      "id": id
+                  },
+                  success: function(res) {
+                    console.log(res);
+                    let tbody = $("#newsMain");
+                    var div;
+                          div =
+                          '<div class="news-list-item clearfix">'+
+                           '<div class="col-xs-12">'+
+                            //  '<h3>' + res[i].title + '</h3>'+
+                               '<h3>'+ res.title +'</h3>'+
+                               '<div>'+'標籤:'+res.tag+'</div>'+
+                               '<p>'+res.content+'</p>'+
+                               '<div class="info">'+
+                                   '<span>'+'ID:' + res.id +'</span>'+
+                                   '<span>'+'作者:' + res.author +'</span>'+
+                                   '<span>'+'創建時間:'+ res.createTime +'</span>'+
+                               '</div>'+
+                           '</div>'+
+                        '</div>';        
+                        tbody.append('<div>' + div + '</div>');    
+                    
+                  },
+                  error: function(res) {
+                      console.log(res);
+                  }
+              });
+
+          }
+
+          
+
+
+    </script>
+</body>
+
+</html>
