@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
 
-
-
 </head>
 
 <body>
@@ -22,13 +20,10 @@
             <input type="checkbox" class="hidden" id="toggle-checkbox">
             <div class="hidden-xs">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">首頁</a></li>
-                    <li><a href="#">國內</a></li>
-                    <li><a href="#">國際</a></li>
+                    <li class="active"><a href="index">首頁</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="login">登入</a></li>
-                    <li><a href="signup">註冊</a></li>
                 </ul>
             </div>
         </div>
@@ -131,29 +126,18 @@
 
             }
 
+            var tag = function(page){
 
-            // TAG
-            $("#sports").click(function() {
-
-                $("#newsMain").empty(); // 查詢時清空前次紀錄
-                $("#pages").empty();
-                let page = window.location.search.toString().split("=")[1];
-                if (page == null) {
-                    page = 1;
-                }
                 alert('sss');
-                let sportsInput = $("#sportsInput").val();
+                let tag = $("#sportsInput").val();
 
                 console.log(sportsInput);
 
                 $.ajax({
-                    url: 'api/News/search/getNewsManyByTag/' + page,
-                    type: 'POST',
+                    url: 'api/News/search/getNewsManyByTag/' + tag +'/'+ page,
+                    type: 'get',
                     dataType: 'json',
-                    data: {
-                        "tag": sportsInput,
-                    },
-                    success: function(res) {
+                     success: function(res) {
 
                         let tbody = $("#newsMain");
                         let tbodyPage = $("#pages");
@@ -163,7 +147,6 @@
                         console.log(newRecord);
                         console.log(pageRecord.size);
                         console.log(res.magmessage);
-
                         for (i in newRecord) {
                             let div;
                             div =
@@ -187,13 +170,24 @@
                                 '<a href="index?no=' + [i] + '" class="title">' + [i] + '<span>' + '.' + '</span>' + '</a>';
                             tbodyPage.append('<a>' + a + '</a>');
                         }
-
-
                     },
                     error: function(msg) {
                         console.log(msg);
                     }
                 });
+            }
+
+
+            // TAG
+            $("#sports").click(function() {
+              $("#newsMain").empty(); // 查詢時清空前次紀錄
+                $("#pages").empty();
+                let page = window.location.search.toString().split("=")[1];
+                if (page == null) {
+                    page = 1;
+                }
+              tag(page);
+
             });
 
             // 修改
@@ -230,60 +224,6 @@
                     }
                 });
             });
-
-            // 風速設定
-            $("input[name='speed_mune']").click(function() {
-                let speed_val = $(this).val();
-                // let speed = 0;
-                // if (speed_val == "Auto") {
-                //     speed = 0;
-                // } else if (speed_val == "小") {
-                //     speed = 33;
-                // } else if (speed_val == "中") {
-                //     speed = 66;
-                // } else {
-                //     speed = 100;
-                // }
-
-                $.ajax({
-                    url: 'control/speed',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        "speed": speed_val
-                    },
-                    success: function(result) {
-                        console.log(result);
-                    },
-                    error: function(msg) {
-                        console.log(msg);
-                    }
-                });
-            });
-
-
-
-            // 溫度設定
-            $("#temp_submit").click(function() {
-                let temp = $("#temp").val();
-                $.ajax({
-                    url: 'control/temp',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        'temp': temp
-                    },
-                    success: function(result) {
-                        console.log(result);
-                    },
-                    error: function(msg) {
-                        console.log(msg);
-                    }
-                });
-            });
-
-            // $("#tbody").html(''); // jquery 90%
-            // document.getElementById("tbody").innerHTML(""); //javascript
         });
     </script>
 </body>

@@ -18,13 +18,15 @@
             <input type="checkbox" class="hidden" id="toggle-checkbox">
             <div class="hidden-xs">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">首頁</a></li>
-                    <li><a href="#">國內</a></li>
-                    <li><a href="#">國際</a></li>
+                    <li class="active"><a href="indexAdmin">首頁</a></li>
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.html">登入</a></li>
-                    <li><a href="signup.html">註冊</a></li>
+                  <form id="logoutForm" action="perform_logout" method="post"  >
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-block">登出</button>
+                  </div>
+                  </form>
                 </ul>
             </div>
         </div>

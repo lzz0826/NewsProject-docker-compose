@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/main.css">
 
 
-   
+
 </head>
 
 <body>
@@ -37,8 +37,10 @@
         <div class="row">
             <div class="col-sm-2">
                 <div class="list-group side-bar hidden-xs">
+                    <a class="btn btn-primary" id="sports" role="button">娛樂</a>
+                    <input type="checkbox" class="hidden" value="娛樂" id="sportsInput">
                     <a href="#" class="list-group-item active">综合</a>
-                    <a href="#" class="list-group-item">運動</a>
+
                     <a href="#" class="list-group-item">娛樂</a>
                     <a href="#" class="list-group-item">政治</a>
                     <a href="#" class="list-group-item">遊戲</a>
@@ -47,12 +49,12 @@
             </div>
             <div class="col-sm-10">
                 <div class="news-list">
-                    <div id = "newsMain">
+                    <div id="newsMain">
                     </div>
                     <div>頁碼:</div>
-                    <a id = "pages">
+                    <a id="pages">
                     </a>
-                    
+
                 </div>
             </div>
 
@@ -61,193 +63,229 @@
     <div class="footer">
         2022
     </div>
-    
+
+
+
+
+
 
     <script src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
-    
+        $(function() {
 
+            $('.title').click(function() {})
+            $(document).ready(function() {
+                let page = window.location.search.toString().split("=")[1];
+                if (page == null) {
+                    page = 1;
+                }
+                console.log(page);
+                $("#newsMain").empty(); // 查詢時清空前次紀錄
+                $("#pages").empty();
+                newsList(page);
+            });
 
-      $(function() {
-          
-          $('.title').click(function() {})
-          $(document).ready(function() {
-            let page= window.location.search.toString().split("=")[1];
-            if(page==null){
-              page=1;
+            var newsList = function(page) {
+                $.ajax({
+                    url: 'api/News/search/getNewsManyByPublic/' + page,
+                    type: 'get',
+                    success: function(res) {
+                        let tbody = $("#newsMain");
+                        let tbodyPage = $("#pages");
+                        newRecord = res['data']['records'];
+                        pageRecord = res['data'];
+                        // console.log(res[0].releaseState);
+                        console.log(newRecord);
+                        console.log(pageRecord.size);
+                        console.log(res.magmessage);
+
+                        for (i in newRecord) {
+                            let div;
+                            div =
+                                '<div class="news-list-item clearfix">' +
+                                '<div class="col-xs-12">' +
+                                //  '<h3>' + res[i].title + '</h3>'+
+                                '<a href="news?no=' + newRecord[i].id + '" class="title">' + newRecord[i].title + '</a>' +
+                                '<div>' + '標籤:' + newRecord[i].tag + '</div>' +
+                                '<div class="info">' +
+                                '<span>' + 'ID:' + newRecord[i].id + '</span>' +
+                                '<span>' + '作者:' + newRecord[i].author + '</span>' +
+                                '<span>' + '創建時間:' + newRecord[i].createTime + '</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                            tbody.append('<div>' + div + '</div>');
+                        };
+                        for (let i = 1; i < pageRecord.pages + 1; i++) {
+                            let a;
+                            a =
+                                '<a href="index?no=' + [i] + '" class="title">' + [i] + '<span>' + '.' + '</span>' + '</a>';
+                            tbodyPage.append('<a>' + a + '</a>');
+                        }
+                    },
+
+                    error: function(res) {
+                        console.log(res);
+                    }
+                });
+
             }
-            console.log(page);
-              $("#newsMain").empty(); // 查詢時清空前次紀錄
-              $("#pages").empty();
-              newsList(page);
-          });
-
-          var newsList =  function(page){
-            $.ajax({
-                  url: 'api/News/search/getNewsManyByPublic/' + page,
-                  type: 'get',
-                  success: function(res) {
-                   let tbody = $("#newsMain");
-                   let tbodyPage = $("#pages");
-                    newRecord = res['data']['records'];
-                    pageRecord = res['data'];
-                    // console.log(res[0].releaseState);
-                    console.log(newRecord);
-                    console.log(pageRecord.size);
-                    console.log(res.magmessage);
-                   
-                    for (i in newRecord) {                    
-                      let div;
-                          div =
-                          '<div class="news-list-item clearfix">'+
-                           '<div class="col-xs-12">'+
-                            //  '<h3>' + res[i].title + '</h3>'+
-                               '<a href="news?no='+newRecord[i].id+'" class="title">'+ newRecord[i].title +'</a>'+
-                               '<div>'+'標籤:'+newRecord[i].tag +'</div>'+
-                               '<div class="info">'+
-                                   '<span>'+'ID:' + newRecord[i].id +'</span>'+
-                                   '<span>'+'作者:' + newRecord[i].author +'</span>'+
-                                   '<span>'+'創建時間:'+ newRecord[i].createTime +'</span>'+
-                               '</div>'+
-                           '</div>'+
-                        '</div>';        
-                        tbody.append('<div>' + div + '</div>');    
-                      };
-                      for (let i = 1 ; i< pageRecord.pages+1 ; i++ ) {
-                      let a;
-                      a = 
-                      '<a href="index?no='+[i]+'" class="title">'+ [i] +'<span>'+'.'+'</span>'+'</a>'
-                      ;
-                      tbodyPage.append('<a>' + a + '</a>');   
-                     }
-                  },
-
-                  error: function(res) {
-                      console.log(res);
-                  }
-              });
-
-          }
-
-         
 
 
-          // 新增
-          $("#createNewsById").click(function() {
+            // TAG
+            $("#sports").click(function() {
 
-              let title = $("#createTitle").val();
-              let author = $("#createAuthor").val();
-              let content = $("#createContent").val();
+                $("#newsMain").empty(); // 查詢時清空前次紀錄
+                $("#pages").empty();
+                let page = window.location.search.toString().split("=")[1];
+                if (page == null) {
+                    page = 1;
+                }
+                alert('sss');
+                let sportsInput = $("#sportsInput").val();
+
+                console.log(sportsInput);
+
+                $.ajax({
+                    url: 'api/News/search/getNewsManyByTag/' + page,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        "tag": sportsInput,
+                    },
+                    success: function(res) {
+
+                        let tbody = $("#newsMain");
+                        let tbodyPage = $("#pages");
+                        newRecord = res['data']['records'];
+                        pageRecord = res['data'];
+                        // console.log(res[0].releaseState);
+                        console.log(newRecord);
+                        console.log(pageRecord.size);
+                        console.log(res.magmessage);
+
+                        for (i in newRecord) {
+                            let div;
+                            div =
+                                '<div class="news-list-item clearfix">' +
+                                '<div class="col-xs-12">' +
+                                //  '<h3>' + res[i].title + '</h3>'+
+                                '<a href="news?no=' + newRecord[i].id + '" class="title">' + newRecord[i].title + '</a>' +
+                                '<div>' + '標籤:' + newRecord[i].tag + '</div>' +
+                                '<div class="info">' +
+                                '<span>' + 'ID:' + newRecord[i].id + '</span>' +
+                                '<span>' + '作者:' + newRecord[i].author + '</span>' +
+                                '<span>' + '創建時間:' + newRecord[i].createTime + '</span>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                            tbody.append('<div>' + div + '</div>');
+                        };
+                        for (let i = 1; i < pageRecord.pages + 1; i++) {
+                            let a;
+                            a =
+                                '<a href="index?no=' + [i] + '" class="title">' + [i] + '<span>' + '.' + '</span>' + '</a>';
+                            tbodyPage.append('<a>' + a + '</a>');
+                        }
 
 
-              $.ajax({
-                  url: 'API_createNewsById',
-                  type: 'POST',
-                  dataType: 'json',
-                  data: {
-                      "title": title,
-                      "author": author,
-                      "content": content,
-                  },
-                  success: function(result) {
-                      console.log(result);
-                  },
-                  error: function(msg) {
-                      console.log(msg);
-                  }
-              });
-          });
+                    },
+                    error: function(msg) {
+                        console.log(msg);
+                    }
+                });
+            });
 
-          // 修改
-          $("#updateNewsById").click(function() {
-              $.ajax({
-                  url: 'API_updateNewsById',
-                  type: 'POST',
-                  dataType: 'json',
-                  data: {
-                      "id": 1
-                  },
-                  success: function(result) {
-                      console.log(result);
-                  },
-                  error: function(msg) {
-                      console.log(msg);
-                  }
-              });
-          });
-          // 刪除
-          $("#deleteNewsById").click(function() {
-              $.ajax({
-                  url: 'API_deleteNewsById',
-                  type: 'POST',
-                  dataType: 'json',
-                  data: {
-                      "id": 1
-                  },
-                  success: function(result) {
-                      console.log(result);
-                  },
-                  error: function(msg) {
-                      console.log(msg);
-                  }
-              });
-          });
+            // 修改
+            $("#updateNewsById").click(function() {
+                $.ajax({
+                    url: 'API_updateNewsById',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        "id": 1
+                    },
+                    success: function(result) {
+                        console.log(result);
+                    },
+                    error: function(msg) {
+                        console.log(msg);
+                    }
+                });
+            });
+            // 刪除
+            $("#deleteNewsById").click(function() {
+                $.ajax({
+                    url: 'API_deleteNewsById',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        "id": 1
+                    },
+                    success: function(result) {
+                        console.log(result);
+                    },
+                    error: function(msg) {
+                        console.log(msg);
+                    }
+                });
+            });
 
-          // 風速設定
-          $("input[name='speed_mune']").click(function() {
-              let speed_val = $(this).val();
-              // let speed = 0;
-              // if (speed_val == "Auto") {
-              //     speed = 0;
-              // } else if (speed_val == "小") {
-              //     speed = 33;
-              // } else if (speed_val == "中") {
-              //     speed = 66;
-              // } else {
-              //     speed = 100;
-              // }
+            // 風速設定
+            $("input[name='speed_mune']").click(function() {
+                let speed_val = $(this).val();
+                // let speed = 0;
+                // if (speed_val == "Auto") {
+                //     speed = 0;
+                // } else if (speed_val == "小") {
+                //     speed = 33;
+                // } else if (speed_val == "中") {
+                //     speed = 66;
+                // } else {
+                //     speed = 100;
+                // }
 
-              $.ajax({
-                  url: 'control/speed',
-                  type: 'POST',
-                  dataType: 'json',
-                  data: {
-                      "speed": speed_val
-                  },
-                  success: function(result) {
-                      console.log(result);
-                  },
-                  error: function(msg) {
-                      console.log(msg);
-                  }
-              });
-          });
+                $.ajax({
+                    url: 'control/speed',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        "speed": speed_val
+                    },
+                    success: function(result) {
+                        console.log(result);
+                    },
+                    error: function(msg) {
+                        console.log(msg);
+                    }
+                });
+            });
 
 
 
-          // 溫度設定
-          $("#temp_submit").click(function() {
-              let temp = $("#temp").val();
-              $.ajax({
-                  url: 'control/temp',
-                  type: 'POST',
-                  dataType: 'json',
-                  data: {
-                      'temp': temp
-                  },
-                  success: function(result) {
-                      console.log(result);
-                  },
-                  error: function(msg) {
-                      console.log(msg);
-                  }
-              });
-          });
+            // 溫度設定
+            $("#temp_submit").click(function() {
+                let temp = $("#temp").val();
+                $.ajax({
+                    url: 'control/temp',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'temp': temp
+                    },
+                    success: function(result) {
+                        console.log(result);
+                    },
+                    error: function(msg) {
+                        console.log(msg);
+                    }
+                });
+            });
 
-          // $("#tbody").html(''); // jquery 90%
-          // document.getElementById("tbody").innerHTML(""); //javascript
-      });
-  </script>
+            // $("#tbody").html(''); // jquery 90%
+            // document.getElementById("tbody").innerHTML(""); //javascript
+        });
+    </script>
 </body>
 
 </html>

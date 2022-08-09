@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/main.css">
 
 
-   
+
 </head>
 
 <body>
@@ -22,13 +22,17 @@
             <input type="checkbox" class="hidden" id="toggle-checkbox">
             <div class="hidden-xs">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">首頁</a></li>
+                    <li class="active"><a href="indexAdmin">首頁</a></li>
                     <li><a href="cretaeNews">新增新聞</a></li>
                                        
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login">登入</a></li>
-                    <li><a href="signup">註冊</a></li>
+                  <form id="logoutForm" action="perform_logout" method="post"  >
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-block">登出</button>
+                  </div>
+                  </form>
+                    
                 </ul>
             </div>
         </div>
@@ -78,6 +82,7 @@
                   },
                   success: function(result) {
                       console.log(result);
+                      window.location.reload();
                   },
                   error: function(msg) {
                       console.log(msg);
@@ -97,6 +102,7 @@
                   },
                   success: function(result) {
                       console.log(result);
+                      window.location.reload();
                       
                   },
                   error: function(msg) {
@@ -155,7 +161,6 @@
                                '</div>'+
                            '</div>'+
                            '<div class="col-xs-2">'+
-                            
                             '<div>'+
                               '<h4>' +releaseState + '</h4>'+
                               '<input type = "button" value = "下架" onclick = "takeDown( '+newRecord[i].id+' );">'+
@@ -207,80 +212,6 @@
                   }
               });
           });
-
-          // // 修改
-          // $("#fgfg").click(function() {
-          //     $.ajax({
-          //         url: 'API_updateNewsById',
-          //         type: 'POST',
-          //         dataType: 'json',
-          //         data: {
-          //             "id": 1
-          //         },
-          //         success: function(result) {
-          //             console.log(result);
-          //         },
-          //         error: function(msg) {
-          //             console.log(msg);
-          //         }
-          //     });
-          // });
-          // 下架
-
- 
-          // 風速設定
-          $("input[name='speed_mune']").click(function() {
-              let speed_val = $(this).val();
-              // let speed = 0;
-              // if (speed_val == "Auto") {
-              //     speed = 0;
-              // } else if (speed_val == "小") {
-              //     speed = 33;
-              // } else if (speed_val == "中") {
-              //     speed = 66;
-              // } else {
-              //     speed = 100;
-              // }
-
-              $.ajax({
-                  url: 'control/speed',
-                  type: 'POST',
-                  dataType: 'json',
-                  data: {
-                      "speed": speed_val
-                  },
-                  success: function(result) {
-                      console.log(result);
-                  },
-                  error: function(msg) {
-                      console.log(msg);
-                  }
-              });
-          });
-
-
-
-          // 溫度設定
-          $("#temp_submit").click(function() {
-              let temp = $("#temp").val();
-              $.ajax({
-                  url: 'control/temp',
-                  type: 'POST',
-                  dataType: 'json',
-                  data: {
-                      'temp': temp
-                  },
-                  success: function(result) {
-                      console.log(result);
-                  },
-                  error: function(msg) {
-                      console.log(msg);
-                  }
-              });
-          });
-
-          // $("#tbody").html(''); // jquery 90%
-          // document.getElementById("tbody").innerHTML(""); //javascript
       });
   </script>
 </body>

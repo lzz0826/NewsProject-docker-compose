@@ -9,6 +9,10 @@
       select id,username,password,permission from account where id = #{id}
 </select>
 
-  
+<!-- Map<String, Object> selectMapByUsetname(Integer usetname); -->
+
+<select id= "selectMapByUsetname" resultType="map">
+      select id,username,password,permission from account where username = #{username}
+</select>
 
 </mapper>

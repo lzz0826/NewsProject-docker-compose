@@ -98,8 +98,8 @@ public class NewsSearchController {
 	
 	//條件查詢(TAG)
 	@ResponseBody
-	@PostMapping(value = "/search/getNewsManyByTag/{pageNum}")
-	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByTag(@PathVariable("pageNum") Long pageNum, String tag){
+	@GetMapping(value = "/search/getNewsManyByTag/{tag}/{pageNum}")
+	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByTag(@PathVariable("pageNum") Long pageNum, @PathVariable("tag") String tag){
 		
 		System.out.println(pageNum);
 		System.out.println(tag);
