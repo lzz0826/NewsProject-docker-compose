@@ -92,10 +92,21 @@ public class NewsSearchController {
 	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByPublic(@PathVariable("pageNum") Long pageNum) {
 //		Map<String, Object> map =new HashMap<String, Object>();
 //		map.put("release_state",0);
-
 		return newsService.getNewsManyByPublic(pageNum);
-
 	}
+	
+	
+	//條件查詢(TAG)
+	@ResponseBody
+	@PostMapping(value = "/search/getNewsManyByTag/{pageNum}")
+	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByTag(@PathVariable("pageNum") Long pageNum, String tag){
+		
+		System.out.println(pageNum);
+		System.out.println(tag);
+        
+        return newsService.getNewsManyByTag(pageNum, tag);
+	}
+	
 
 //---------------------新增**
 	// 新增單筆(for表單)-

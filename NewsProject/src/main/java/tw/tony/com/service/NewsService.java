@@ -44,6 +44,22 @@ public class NewsService {
         return responseData(page);
 	}
 	
+	
+	//條件查詢(上架的 TAG )
+	@ResponseBody
+	@PostMapping(value = "/search/getNewsManyByTag/{pageNum}")
+	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByTag(Long pageNum ,String tag){
+		
+		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>(); 
+		wrapper.eq("release_state", 0).eq("tag", tag);
+        IPage<AllNewsDetailed> page = new Page<>(pageNum, 1);
+        newsMapper.selectPage(page, wrapper);
+        System.out.println(JSON.toJSONString(page));
+        
+        return responseData(page);
+	}
+	
+	
 	//回傳Data
 	private ResponseData<IPage<AllNewsDetailed>> responseData(IPage<AllNewsDetailed> page) {
         ResponseData<IPage<AllNewsDetailed>> responseData = new ResponseData();
