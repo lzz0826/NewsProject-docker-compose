@@ -32,14 +32,11 @@
         <div class="row">
             <div class="col-sm-2">
                 <div class="list-group side-bar hidden-xs">
-                    <a class="btn btn-primary" id="sports" role="button">娛樂</a>
-                    <input type="checkbox" class="hidden" value="娛樂" id="sportsInput">
-                    <a href="#" class="list-group-item active">综合</a>
-
-                    <a href="#" class="list-group-item">娛樂</a>
-                    <a href="#" class="list-group-item">政治</a>
-                    <a href="#" class="list-group-item">遊戲</a>
-
+                    <a href="index" class="list-group-item active">综合</a>
+                    <a class="btn btn-primary" id="sports" role="button">運動</a>
+                    <a class="btn btn-primary" id="politics" role="button">政治</a>
+                    <a class="btn btn-primary" id="game" role="button">遊戲</a>
+                    <a class="btn btn-primary" id="entertainment" role="button">娛樂</a>
                 </div>
             </div>
             <div class="col-sm-10">
@@ -60,26 +57,41 @@
     </div>
 
 
-
-
-
-
     <script src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
         $(function() {
-
             $('.title').click(function() {})
             $(document).ready(function() {
                 let page = window.location.search.toString().split("=")[1];
+                let tag;
+                try {
+                    tag = window.location.search.toString().split("=")[1].split("&")[1];
+                } catch (e) {
+                    tag = null;
+                }
                 if (page == null) {
                     page = 1;
                 }
                 console.log(page);
                 $("#newsMain").empty(); // 查詢時清空前次紀錄
                 $("#pages").empty();
-                newsList(page);
-            });
 
+                if (tag == null) {
+
+                    newsList(page);
+                } else {
+                    page = window.location.search.toString().split("=")[1].split("&")[0];
+                    tag = window.location.search.toString().split("=")[1].split("&")[1];
+                    if (page == null) {
+                        page = 1;
+                    }
+
+                    tagPage(page, tag);
+                }
+
+                // let page = window.location.search.toString().split("&")[0].split('=')[1]
+                // let tag = window.location.search.toString().split("&")[1].split('=')[1]
+            });
             var newsList = function(page) {
                 $.ajax({
                     url: 'api/News/search/getNewsManyByPublic/' + page,
@@ -114,31 +126,21 @@
                         for (let i = 1; i < pageRecord.pages + 1; i++) {
                             let a;
                             a =
-                                '<a href="index?no=' + [i] + '" class="title">' + [i] + '<span>' + '.' + '</span>' + '</a>';
+                                '<a href="index?no=' + [i] + '" class="btn btn-primary" role="button" >' + [i] + '<span>' + '.' + '</span>' + '</a>';
                             tbodyPage.append('<a>' + a + '</a>');
                         }
                     },
-
                     error: function(res) {
                         console.log(res);
                     }
                 });
-
             }
-
-            var tag = function(page){
-
-                alert('sss');
-                let tag = $("#sportsInput").val();
-
-                console.log(sportsInput);
-
+            var tagPage = function(page, tag) {
                 $.ajax({
-                    url: 'api/News/search/getNewsManyByTag/' + tag +'/'+ page,
+                    url: 'api/News/search/getNewsManyByTag/' + tag + '/' + page,
                     type: 'get',
                     dataType: 'json',
-                     success: function(res) {
-
+                    success: function(res) {
                         let tbody = $("#newsMain");
                         let tbodyPage = $("#pages");
                         newRecord = res['data']['records'];
@@ -167,7 +169,7 @@
                         for (let i = 1; i < pageRecord.pages + 1; i++) {
                             let a;
                             a =
-                                '<a href="index?no=' + [i] + '" class="title">' + [i] + '<span>' + '.' + '</span>' + '</a>';
+                                '<a href="index?no=' + [i] + '&' + tag + '" class="btn btn-primary" role="button">' + [i] + '<span>' + '.' + '</span>' + '</a>';
                             tbodyPage.append('<a>' + a + '</a>');
                         }
                     },
@@ -177,18 +179,97 @@
                 });
             }
 
-
-            // TAG
+            // TAG sports
             $("#sports").click(function() {
-              $("#newsMain").empty(); // 查詢時清空前次紀錄
+                $("#newsMain").empty(); // 查詢時清空前次紀錄
                 $("#pages").empty();
                 let page = window.location.search.toString().split("=")[1];
+
+                try {
+                    tag = window.location.search.toString().split("=")[1].split("&")[1];
+                } catch (e) {
+                    tag = null;
+                }
                 if (page == null) {
                     page = 1;
                 }
-              tag(page);
+                if (tag == null) {
 
+                    tag = '運動';
+                }
+                tagPage(page, tag);
             });
+
+            // TAG politicsInput
+            $("#politics").click(function() {
+                $("#newsMain").empty(); // 查詢時清空前次紀錄
+                $("#pages").empty();
+                let page = window.location.search.toString().split("=")[1];
+
+                try {
+                    tag = window.location.search.toString().split("=")[1].split("&")[1];
+                } catch (e) {
+                    tag = null;
+                }
+                if (page == null) {
+                    page = 1;
+                }
+                if (tag == null) {
+
+                    tag = '政治';
+                }
+                tagPage(page, tag);
+            });
+
+            // TAG game
+            $("#game").click(function() {
+                $("#newsMain").empty(); // 查詢時清空前次紀錄
+                $("#pages").empty();
+                let page = window.location.search.toString().split("=")[1];
+
+                try {
+                    tag = window.location.search.toString().split("=")[1].split("&")[1];
+                } catch (e) {
+                    tag = null;
+                }
+                if (page == null) {
+                    page = 1;
+                }
+                if (tag == null) {
+
+                    tag = '遊戲';
+                }
+                tagPage(page, tag);
+            });
+
+
+            // TAG entertainment
+            $("#entertainment").click(function() {
+                $("#newsMain").empty(); // 查詢時清空前次紀錄
+                $("#pages").empty();
+                let page = window.location.search.toString().split("=")[1];
+
+                try {
+                    tag = window.location.search.toString().split("=")[1].split("&")[1];
+                } catch (e) {
+                    tag = null;
+                }
+                if (page == null) {
+                    page = 1;
+                }
+                if (tag == null) {
+
+                    tag = '娛樂';
+                }
+                tagPage(page, tag);
+            });
+
+
+
+
+
+
+
 
             // 修改
             $("#updateNewsById").click(function() {

@@ -55,8 +55,10 @@ public class SecuityConfig extends WebSecurityConfigurerAdapter {
 //		.maximumSessions(1);
 
 	    http.authorizeRequests()
-	    		.antMatchers("/indexAdmin").hasAnyRole("ADMIN")
-	    		.antMatchers("/newsAdmin").hasAnyRole("ADMIN")
+	    		.antMatchers("/indexAdmin").hasRole("MDMIN")
+	    		.antMatchers("/cretaeNews").hasRole("MDMIN")
+	    		.antMatchers("/newsAdmin").hasRole("MDMIN")
+	    	
 	            .and()
 	            .formLogin()
 	            	.loginPage("/login")

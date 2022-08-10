@@ -96,22 +96,29 @@ public class NewsSearchController {
 	}
 	
 	
-	//條件查詢(TAG)
+	//條件查詢(上架的 TAG)
 	@ResponseBody
 	@GetMapping(value = "/search/getNewsManyByTag/{tag}/{pageNum}")
 	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByTag(@PathVariable("pageNum") Long pageNum, @PathVariable("tag") String tag){
-		
-		System.out.println(pageNum);
-		System.out.println(tag);
-        
+	
         return newsService.getNewsManyByTag(pageNum, tag);
 	}
+	
+	//條件查詢(所有 TAG)
+	@ResponseBody
+	@GetMapping(value = "/search/getNewsManyAllDownByTag/{tag}/{pageNum}")
+	public ResponseData<IPage<AllNewsDetailed>> getNewsAllManyByTag(@PathVariable("pageNum") Long pageNum, @PathVariable("tag") String tag){
+		
+        return newsService.getNewsAllManyByTag(pageNum, tag);
+	}
+	
 	
 
 //---------------------新增**
 	// 新增單筆(for表單)-
     @PostMapping(value = "/creatOneNews")
-    public String creatOneNews( AllNewsDetailed allNewsDetailed) {
+    public String creatOneNews(AllNewsDetailed allNewsDetailed) {
+    	System.err.println(allNewsDetailed);
 		int count = newsMapper.insert(allNewsDetailed);
 		if (count >= 1) {
 			return "redirect:/indexAdmin";

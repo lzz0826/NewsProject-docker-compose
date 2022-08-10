@@ -20,61 +20,55 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="indexAdmin">首頁</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                  <form id="logoutForm" action="perform_logout" method="post"  >
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-block">登出</button>
-                  </div>
-                </ul>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="col-xs-12">
 
-          <div >
+            <div>
 
-            <form class="row g-3 " id="testForm" action="api/News/creatOneNews" method="post">
-              <div class="col-12">
-                  <label class="form-label">標題</label>
-                  <input name="title" type="text" class="form-control" id="title" placeholder="請輸入標題" maxlength="20">
-                  <!-- <input name="title" type="text" class="form-control" id="title" placeholder="請輸入標題" value="99999"> -->
-              </div>
-              <div class="col-12">
-                  <label>類別</label>
-                  <select id="select" class="form-control" name="tag">
+                <form class="row g-3 " id="testForm" action="api/News/creatOneNews" method="post">
+                    <div class="col-12">
+                        <label class="form-label">標題</label>
+                        <input name="title" type="text" class="form-control" id="title" placeholder="請輸入標題" maxlength="20">
+                        <!-- <input name="title" type="text" class="form-control" id="title" placeholder="請輸入標題" value="99999"> -->
+                    </div>
+                    <div class="col-12">
+                        <label>類別</label>
+                        <select id="select" class="form-control" name="tag">
                       <option>综合</option>
                       <option>運動</option>
                       <option>娛樂</option>
                       <option>政治</option>
                       <option>遊戲</option>
                   </select>
-              </div>
-              <div class="col-12">
-                  <label class="form-label">作者</label>
-                  <input name="author" type="text" class="form-control" id="author" placeholder="請輸入作者" maxlength="10">
-              </div>
-  
-              <div class="col-12">
-                  <label class="form-label">文章內容</label>
-                  <textarea name="content" class="form-control" id="content" rows="8"></textarea>
-              </div>
-              <div class="col-12">
-                  <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck" value="1" name="releaseState">
-                      <label class="form-check-label" for="gridCheck">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">作者</label>
+                        <input name="author" type="text" class="form-control" id="author" placeholder="請輸入作者" maxlength="10">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">文章內容</label>
+                        <textarea name="content" class="form-control" id="content" rows="8"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck" value="1" name="releaseState">
+                            <label class="form-check-label" for="gridCheck">
                   隱藏新聞(下架)
                   </label>
-                  </div>
-              </div>
-              <div class="col-12">
-                  <button type="submit" class="btn btn-primary">送出</button>
-              </div>
-          </form>
-          </div>
-          
-          <div id = "newsMain">
-          </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">送出</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="newsMain">
+            </div>
         </div>
     </div>
     <div class="footer">
@@ -83,11 +77,8 @@
 
 
     <script src="js/jquery-3.2.1.min.js"></script>
-    <script>
 
 
-
-    </script>
 </body>
 
 </html>

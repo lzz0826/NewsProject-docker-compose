@@ -52,6 +52,7 @@ public class PageController {
 	
 	}
 	
+	
 	@GetMapping("/cretaeNews")
 	public String cretaeNews() {
 		return "cretaeNews";
