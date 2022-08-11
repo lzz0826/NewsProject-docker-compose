@@ -1,5 +1,7 @@
 package tw.tony.com.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import tw.tony.com.mapper.NewsMapper;
 import tw.tony.com.po.AllNewsDetailed;
@@ -21,53 +24,6 @@ public class NewsService {
 	
 	@Autowired
 	private NewsMapper newsMapper;
-
-	// 查整張表
-	public ResponseData<IPage<AllNewsDetailed>> getAllNewsDetailed(Long pageNum) {
-		System.out.println("pageNum  "+pageNum);
-        IPage<AllNewsDetailed> page = new Page<>(pageNum, 2);
-        newsMapper.selectPage(page, null);
-        System.out.println(JSON.toJSONString(page));
-
-		return responseData(page);
-	}
-	
-	
-	//條件查詢(上架的)
-	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByPublic(Long pageNum){
-		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>(); 
-		wrapper.eq("release_state", 0);
-        IPage<AllNewsDetailed> page = new Page<>(pageNum, 1);
-        newsMapper.selectPage(page, wrapper);
-        System.out.println(JSON.toJSONString(page));
-        
-        return responseData(page);
-	}
-	
-	
-	//條件查詢(上架的 TAG )
-	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByTag(Long pageNum ,String tag){
-		
-		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>(); 
-		wrapper.eq("release_state", 0).eq("tag", tag);
-        IPage<AllNewsDetailed> page = new Page<>(pageNum, 1);
-        newsMapper.selectPage(page, wrapper);
-        System.out.println(JSON.toJSONString(page));
-        
-        return responseData(page);
-	}
-	
-	
-	//條件查詢(所有的 TAG )
-	public ResponseData<IPage<AllNewsDetailed>> getNewsAllManyByTag(Long pageNum ,String tag){	
-		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>(); 
-		wrapper.eq("tag", tag);
-        IPage<AllNewsDetailed> page = new Page<>(pageNum, 1);
-        newsMapper.selectPage(page, wrapper);
-        System.out.println(JSON.toJSONString(page));
-        
-        return responseData(page);
-	}
 	
 	
 	//回傳Data
@@ -86,6 +42,85 @@ public class NewsService {
         	return responseData;
 		}
 	}
+
+	// 查整張表
+	public ResponseData<IPage<AllNewsDetailed>> getAllNewsDetailed(Long pageNum) {
+		System.out.println("pageNum  "+pageNum);
+        IPage<AllNewsDetailed> page = new Page<>(pageNum, 5);
+        newsMapper.selectPage(page, null);
+        System.out.println(JSON.toJSONString(page));
+
+		return responseData(page);
+	}
+	
+//	// 單筆查詢 ID
+//	public ResponseData<IPage<AllNewsDetailed>> getNewsById(Long pageNum, Long id) {
+//		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>();
+//		wrapper.eq("id", id);
+//		IPage<AllNewsDetailed> page = new Page<>(pageNum,10);
+//		newsMapper.selectPage(page, wrapper);
+//		System.out.println(JSON.toJSONString(page));
+//		return  responseData(page);
+//
+//	}
+//	
+	
+	// 查詢多個BY ID
+	public ResponseData<IPage<AllNewsDetailed>> getNewsManyById(Long pageNum,List<Integer> idList) {
+		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>();
+		IPage<AllNewsDetailed> page = new Page<>(pageNum,5);
+		for(int i = 0; i<idList.size() ;i++ ) {	
+		}
+		wrapper.eq("id", idList);
+		newsMapper.selectPage(page, wrapper);
+		System.out.println(JSON.toJSONString(page));
+		return responseData(page);
+	}
+	
+	
+	
+	
+	
+	
+	
+	//條件查詢(上架的)
+	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByPublic(Long pageNum){
+		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>(); 
+		wrapper.eq("release_state", 0);
+        IPage<AllNewsDetailed> page = new Page<>(pageNum, 5);
+        newsMapper.selectPage(page, wrapper);
+        System.out.println(JSON.toJSONString(page));
+        
+        return responseData(page);
+	}
+	
+	
+	//條件查詢(上架的 TAG )
+	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByTag(Long pageNum ,String tag){
+		
+		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>(); 
+		wrapper.eq("release_state", 0).eq("tag", tag);
+        IPage<AllNewsDetailed> page = new Page<>(pageNum, 5);
+        newsMapper.selectPage(page, wrapper);
+        System.out.println(JSON.toJSONString(page));
+        
+        return responseData(page);
+	}
+	
+	
+	//條件查詢(所有的 TAG )
+	public ResponseData<IPage<AllNewsDetailed>> getNewsAllManyByTag(Long pageNum ,String tag){	
+		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>(); 
+		wrapper.eq("tag", tag);
+        IPage<AllNewsDetailed> page = new Page<>(pageNum, 5);
+        newsMapper.selectPage(page, wrapper);
+        System.out.println(JSON.toJSONString(page));
+        
+        return responseData(page);
+	}
+	
+	
+
 	
 	// 0 = 公開     1 = 下架.刪除(軟刪除)      
 	@PostMapping(value = "/update/stateModify")
@@ -110,6 +145,18 @@ public class NewsService {
 
 	}
 	
+	
+//	// 單筆查詢 ID
+//	public ResponseData<IPage<AllNewsDetailed>> getNewsById(Long pageNum, Long id) {
+//		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>();
+//		wrapper.eq("id", id);
+//		IPage<AllNewsDetailed> page = new Page<>(pageNum,10);
+//		newsMapper.selectPage(page, wrapper);
+//		System.out.println(JSON.toJSONString(page));
+//		return  responseData(page);
+//
+//	}
+//	
 	
 	
 }

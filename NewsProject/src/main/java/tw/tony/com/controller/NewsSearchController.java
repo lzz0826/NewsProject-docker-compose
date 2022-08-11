@@ -67,24 +67,6 @@ public class NewsSearchController {
 
 	}
 
-	// 查詢多個BY ID
-	@ResponseBody
-	@PostMapping(value = "/search/getNewsManyById")
-	public String getNewsManyById(@RequestParam List<Integer> list) {
-
-		List<AllNewsDetailed> allNewsDetailed = newsMapper.selectBatchIds(list);
-
-		try {
-			String resultString = objectMapper.writeValueAsString(allNewsDetailed);
-			System.out.println(resultString);
-			return resultString;
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			return "";
-		}
-
-	}
 
 	// 條件查詢(上架的)
 	@ResponseBody
@@ -131,20 +113,16 @@ public class NewsSearchController {
 	@PostMapping(value = "/create/setNews")
 	@ResponseBody
 	public String createNews(@RequestParam String author, @RequestParam String title, @RequestParam String content) {
-
 		AllNewsDetailed allNewsDetailed = new AllNewsDetailed();
 		allNewsDetailed.setAuthor(author);
 		allNewsDetailed.setContent(content);
 		allNewsDetailed.setTitle(title);
-
 		int count = newsMapper.insert(allNewsDetailed);
 		if (count >= 1) {
 			return "創建成功";
 		} else {
-
 			return "創建失敗";
 		}
-
 	}
 
 //--------------修改
@@ -159,27 +137,22 @@ public class NewsSearchController {
 		}      
     }
 	
-	
 	// 修改單筆
 	@PostMapping(value = "/update/updateNews")
 	@ResponseBody
 	public String updateNewsById(@RequestParam Integer id, @RequestParam String author, @RequestParam String title,
 			@RequestParam String content) {
-
 		AllNewsDetailed allNewsDetailed = new AllNewsDetailed();
 		allNewsDetailed.setId(id);
 		allNewsDetailed.setAuthor(author);
 		allNewsDetailed.setContent(content);
 		allNewsDetailed.setTitle(title);
-
 		int count = newsMapper.updateById(allNewsDetailed);
 		if (count >= 1) {
 			return "修改成功";
 		} else {
-
 			return "查無此ID";
 		}
-
 	}
 
 	// 0 = 公開     1 = 下架.刪除(軟刪除)      
@@ -187,7 +160,6 @@ public class NewsSearchController {
 	@ResponseBody
 	public ResponseData stateModifyNewsById(@RequestParam Integer id, @RequestParam Integer releaseState) {
 		return newsService.stateModifyNewsById(id, releaseState);
-
 
 	}
 
@@ -211,12 +183,10 @@ public class NewsSearchController {
 	@PostMapping(value = "/delete/deleteManyNews")
 	@ResponseBody
 	public String deleteManyNewsById(@RequestParam List<Integer> list) {
-
 		int count = newsMapper.deleteBatchIds(list);
 		if (count >= 1) {
 			return "刪除成功 共" + count + "筆";
 		} else {
-
 			return "查無此ID";
 		}
 	}
@@ -225,15 +195,25 @@ public class NewsSearchController {
 	@PostMapping(value = "/delete/deleteNewsByMap")
 	@ResponseBody
 	public String deleteManyNewsById(@RequestParam Map<String, Object> list) {
-
 		int count = newsMapper.deleteByMap(list);
 		if (count >= 1) {
 			return "刪除成功 共" + count + "筆";
 		} else {
-
 			return "查無此條件";
 		}
 	}
+	
+	
+//	// 查詢多個BY ID
+//	@ResponseBody
+//	@PostMapping(value = "/search/getNewsManyById/{pageNum}")
+//	public ResponseData<IPage<AllNewsDetailed>> getNewsManyById(@PathVariable("pageNum") Long pageNum, @RequestParam List<Integer> idList) {
+//		
+//		System.out.println("pageNum  "+pageNum);
+//		System.out.println("idList  "+idList);
+//		return newsService.getNewsManyById(pageNum, idList);
+//	}
+
 
 //	@ResponseBody
 //	@PostMapping(value = "/getNewsByTime")

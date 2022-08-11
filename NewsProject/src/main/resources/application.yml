@@ -15,7 +15,7 @@ spring:
        enabled: true               # 啟用 Flyway Migration
        locations: classpath:db/migration # Migration 檔案存放的資料夾
        # 以下是資料庫的連線設定
-       url: jdbc:mysql://localhost:3306/news01?useUnicode=true&characterEncoding=utf-8
+       url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8
        user: root
        password: 123456
        baseline-on-migrate: true
