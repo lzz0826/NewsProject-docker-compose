@@ -1,21 +1,21 @@
 # NewsProject-docker-compose
 
+
 這是一個包含前.後端新聞網頁的專案
 並架設在 docker-compose 上快速部屬 
 
 
-使用套件:
+## 使用套件:
 
 後端:   1.MyBatis-Plus
         2.flyway
         3.spring boot security
         
         
-前端:   1.bootstrap
+前端:   1.bootstrap 2.JavaScript 3.jquery
 
-實例使用說明:
+## 實例使用說明:
 1.  mkdir /mydocker    創一個路徑
-
 
 2.  mkdir opt     進到/mydocker後再創 opt 路徑
 
@@ -43,24 +43,22 @@ is the expected type
 
 8. vim my.cnf     建立一個 my.cnf 檔 輸入以下內容
 --------------------------------------------------------
-[mysqld]
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
-#Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=0
-#Settings user and group are ignored when systemd is used.
-#If you need to run mysqld under a different user or group,
-#customize your systemd unit file for mariadb according to the
-#instructions in http://fedoraproject.org/wiki/Systemd
+[mysqld]<br />
+datadir=/var/lib/mysql<br />
+socket=/var/lib/mysql/mysql.sock<br />
+#Disabling symbolic-links is recommended to prevent assorted security risks<br />
+symbolic-links=0<br />
+#Settings user and group are ignored when systemd is used.<br />
+#If you need to run mysqld under a different user or group,<br />
+#customize your systemd unit file for mariadb according to the<br />
+#instructions in http://fedoraproject.org/wiki/Systemd<br />
 
-[mysqld_safe]
-log-error=/var/log/mariadb/mariadb.log
-pid-file=/var/run/mariadb/mariadb.pid
+[mysqld_safe]<br />
+log-error=/var/log/mariadb/mariadb.log<br />
+pid-file=/var/run/mariadb/mariadb.pid<br />
 
-#
-#include all files from the config directory
-#
-!includedir /etc/my.cnf.d
+#include all files from the config directory<br />
+!includedir /etc/my.cnf.d<br />
 
 ------------------------------------------------------------------
 
