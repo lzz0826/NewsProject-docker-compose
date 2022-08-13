@@ -18,6 +18,9 @@
 ## 實例使用說明:
 
 **需先行安裝 docekr & docker-compose**
+**測試帳號:root **
+**測試密碼:123456 **
+
 
 1.  mkdir /mydocker    **創一個路徑**
 
