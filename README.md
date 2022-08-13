@@ -82,7 +82,7 @@ pid-file=/var/run/mariadb/mariadb.pid<br />
 
 14. docker ps  **查看容器是否正常啟動** 
 
-*第一次在創建 'flywayInitializer' 資料庫時 有可能失敗
+*第一次在創建 'flywayInitializer' 資料表時 有可能失敗
 
 
 15. docker-compose down  & docker-compose up -d   **再次重啟 docker-compose**
