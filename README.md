@@ -89,6 +89,10 @@ pid-file=/var/run/mariadb/mariadb.pid<br />
 
 如成功啟動: 網址 : 宿主機IP:8080  
 
+# 範例圖:
+
+![image](https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/%E7%99%BB%E5%85%A5.jpg)
+
 
 
 
