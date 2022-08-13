@@ -16,17 +16,17 @@
 
 ## 實例使用說明:
 
-**需先行安裝 docekr & docker-compose**
+**需先行安裝 docekr & docker-compose**<br />
 
-1.  mkdir /mydocker    **創一個路徑**
+1.  mkdir /mydocker    **創一個路徑**<br />
 
-2.  mkdir opt     **進到/mydocker後再創 opt 路徑**
+2.  mkdir opt     **進到/mydocker後再創 opt 路徑**<br />
 
-3.  cd opt       **到opt 路徑內把 (news.jar) 檔放進去  -可以先安裝 yum install lrzsz 使用拖拉功能**
+3.  cd opt       **到opt 路徑內把 (news.jar) 檔放進去  -可以先安裝 yum install lrzsz 使用拖拉功能**<br />
 
-4. cd ..    **回到 mydocker路徑再把 (docker-compose.yml) 放進去**
+4. cd ..    **回到 mydocker路徑再把 (docker-compose.yml) 放進去**<br />
 
-5.  docker-compose up -d    **啟動 dokcer-compose**
+5.  docker-compose up -d    **啟動 dokcer-compose**<br />
 
 **會出現以下訊息  
 ERROR: for mysql  Cannot start service mysql: failed to create shim task: OCI runtime create 
@@ -40,11 +40,11 @@ is the expected type
 
 **
 
-6. cd /app/mysql/conf    **進到 速主機下的 conf路徑**
+6. cd /app/mysql/conf    **進到 速主機下的 conf路徑**<br />
 
-7. rm -r my.cnf    **刪除 my.cnf 路徑(我們要的是文件檔)**
+7. rm -r my.cnf    **刪除 my.cnf 路徑(我們要的是文件檔)**<br />
 
-8. vim my.cnf     **建立一個 my.cnf 檔 輸入以下內容**
+8. vim my.cnf     **建立一個 my.cnf 檔 輸入以下內容**<br />
 --------------------------------------------------------
 [mysqld]<br />
 datadir=/var/lib/mysql<br />
@@ -66,22 +66,22 @@ pid-file=/var/run/mariadb/mariadb.pid<br />
 ------------------------------------------------------------------
 
 
-9. cd /app     **再回到 app 路徑下**
+9. cd /app     **再回到 app 路徑下**<br />
 
-10. mkdir java     **創建 java 目錄在把 (application.yml) 放到裡面**
+10. mkdir java     **創建 java 目錄在把 (application.yml) 放到裡面**<br />
 
-11. cd /mydocker     **回到 mydocker 路徑下**
+11. cd /mydocker     **回到 mydocker 路徑下**<br />
 
-12. docker-compose down     **先關閉所有容器**
+12. docker-compose down     **先關閉所有容器**<br />
 
-13. docker-compose up -d    **重新啟動**
+13. docker-compose up -d    **重新啟動**<br />
 
-14. docker ps  **查看容器是否正常啟動** 
+14. docker ps  **查看容器是否正常啟動** <br />
 
 *第一次在創建 'flywayInitializer' 資料庫時 有可能失敗
 
 
-15. docker-compose down  & docker-compose up -d   **再次重啟 docker-compose**
+15. docker-compose down  & docker-compose up -d   **再次重啟 docker-compose**<br />
 
 如成功啟動: 網址 : 宿主機IP:8080  
 
