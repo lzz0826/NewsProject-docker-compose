@@ -15,6 +15,9 @@
 前端:   1.bootstrap 2.JavaScript 3.jquery
 
 ## 實例使用說明:
+
+**需先行安裝 docekr & docker-compose**
+
 1.  mkdir /mydocker    創一個路徑
 
 2.  mkdir opt     進到/mydocker後再創 opt 路徑
