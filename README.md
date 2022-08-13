@@ -1,8 +1,9 @@
 # NewsProject-docker-compose
 
 
-這是一個包含前.後端新聞網頁的專案
-並架設在 docker-compose 上快速部屬 
+這是一個包含前.後端新聞網頁的專案<br />
+並架設在 docker-compose 上快速部屬 <br />
+包含客戶端顯示,以及後臺登入 增.刪.改.查<br />
 
 
 ## 使用套件:
