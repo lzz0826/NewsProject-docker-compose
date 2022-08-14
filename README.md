@@ -44,7 +44,7 @@ is the expected type
 
 **
 
-6. cd /app/mysql/conf    **進到 速主機下的 conf路徑**
+6. cd /app/mysql/conf    **進到 宿主機下的 conf路徑**
 
 7. rm -r my.cnf    **刪除 my.cnf 路徑(我們要的是文件檔)**
 
