@@ -66,8 +66,10 @@
     </div>
 
 
+
     <script src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
+        // 下架
         function takeDown(id) {
             // let id = $("#takeDown").val();
             $.ajax({
@@ -88,6 +90,7 @@
             });
         }
 
+        // 上架
         function onTheShelf(id) {
             // let id = $("#takeDown").val();
             $.ajax({
@@ -108,6 +111,52 @@
                 }
             });
         }
+
+        // 軟刪除
+        function falseDel(id) {
+            // let id = $("#takeDown").val();
+            $.ajax({
+                url: '/api/News/update/stateModify',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    "id": id,
+                    "releaseState": 2
+                },
+                success: function(result) {
+                    console.log(result);
+                    window.location.reload();
+
+                },
+                error: function(msg) {
+                    console.log(msg);
+                }
+            });
+        }
+
+        // 真實刪除
+        function delNewsById(id) {
+            // let id = $("#takeDown").val();
+            $.ajax({
+                url: '/api/News/delete/deleteNews',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    "id": id,
+                },
+                success: function(result) {
+                    window.location.reload();
+                    console.log(result['data']);
+
+                },
+                error: function(msg) {
+                    window.location.reload();
+                    console.log(msg);
+                }
+            });
+        }
+
+
 
 
 
@@ -181,6 +230,7 @@
                                 '<h4>' + releaseState + '</h4>' +
                                 '<input type = "button" value = "下架" onclick = "takeDown( ' + newRecord[i].id + ' );">' +
                                 '<input type = "button" value = "上架" onclick = "onTheShelf( ' + newRecord[i].id + ' );">' +
+                                '<input type = "button" value = "刪除" onclick = "delNewsById( ' + newRecord[i].id + ' );">' +
                                 '</div>' +
                                 '</div class="col-xs-2">' +
                                 '</div>';
@@ -241,6 +291,7 @@
                                 '<h4>' + releaseState + '</h4>' +
                                 '<input type = "button" value = "下架" onclick = "takeDown( ' + newRecord[i].id + ' );">' +
                                 '<input type = "button" value = "上架" onclick = "onTheShelf( ' + newRecord[i].id + ' );">' +
+                                '<input type = "button" value = "刪除" onclick = "delNewsById( ' + newRecord[i].id + ' );">' +
                                 '</div>' +
                                 '</div class="col-xs-2">' +
                                 '</div>';

@@ -53,17 +53,6 @@ public class NewsService {
 		return responseData(page);
 	}
 	
-//	// 單筆查詢 ID
-//	public ResponseData<IPage<AllNewsDetailed>> getNewsById(Long pageNum, Long id) {
-//		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>();
-//		wrapper.eq("id", id);
-//		IPage<AllNewsDetailed> page = new Page<>(pageNum,10);
-//		newsMapper.selectPage(page, wrapper);
-//		System.out.println(JSON.toJSONString(page));
-//		return  responseData(page);
-//
-//	}
-//	
 	
 	// 查詢多個BY ID
 	public ResponseData<IPage<AllNewsDetailed>> getNewsManyById(Long pageNum,List<Integer> idList) {
@@ -76,10 +65,6 @@ public class NewsService {
 		System.out.println(JSON.toJSONString(page));
 		return responseData(page);
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -115,16 +100,12 @@ public class NewsService {
         IPage<AllNewsDetailed> page = new Page<>(pageNum, 5);
         newsMapper.selectPage(page, wrapper);
         System.out.println(JSON.toJSONString(page));
-        
         return responseData(page);
 	}
 	
 	
-
 	
-	// 0 = 公開     1 = 下架.刪除(軟刪除)      
-	@PostMapping(value = "/update/stateModify")
-	@ResponseBody
+	// 0 = 公開     1 = 下架  2 =刪除(軟刪除)      
 	public ResponseData stateModifyNewsById(@RequestParam Integer id, @RequestParam Integer releaseState) {
 		System.out.println("sdfds");
 		AllNewsDetailed allNewsDetailed = new AllNewsDetailed();
@@ -146,6 +127,35 @@ public class NewsService {
 	}
 	
 	
+	
+	// 刪除單筆(真實移除)
+	public ResponseData deleteNewsById(Integer id) {
+		ResponseData responseData = new ResponseData();
+		System.out.println("id:  "+id);
+		AllNewsDetailed allNewsDetailed = new AllNewsDetailed();
+		allNewsDetailed.setId(id);
+		int count = newsMapper.deleteById(id);
+		if (count >= 1) {
+			responseData.setMagmessage("刪除成功");
+			return responseData;
+		} else {
+			responseData.setMagmessage("查無此ID");
+			return responseData;
+		}
+	}
+	
+	
+//	// 單筆查詢 ID
+//	public ResponseData<IPage<AllNewsDetailed>> getNewsById(Long pageNum, Long id) {
+//		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>();
+//		wrapper.eq("id", id);
+//		IPage<AllNewsDetailed> page = new Page<>(pageNum,10);
+//		newsMapper.selectPage(page, wrapper);
+//		System.out.println(JSON.toJSONString(page));
+//		return  responseData(page);
+//
+//	}
+//	
 //	// 單筆查詢 ID
 //	public ResponseData<IPage<AllNewsDetailed>> getNewsById(Long pageNum, Long id) {
 //		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>();

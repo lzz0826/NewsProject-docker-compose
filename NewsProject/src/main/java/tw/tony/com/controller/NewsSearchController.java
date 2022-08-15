@@ -40,33 +40,15 @@ public class NewsSearchController {
 	@Autowired
 	private NewsService newsService;
 
+//----------------------查詢------------------------------
+
 	// 查整張表
 	@ResponseBody
 	@GetMapping(value = "/search/getAllNews/{pageNum}")
 	public ResponseData<IPage<AllNewsDetailed>> getAllNewsDetailed(@PathVariable("pageNum") Long pageNum) {
-		System.out.println("pageNum  "+pageNum);
+		System.out.println("pageNum  " + pageNum);
 		return newsService.getAllNewsDetailed(pageNum);
 	}
-
-	// 單筆查詢 ID
-	@ResponseBody
-	@PostMapping(value = "/search/getNewsById")
-	public String getNewsById(@RequestParam String id) {
-
-		AllNewsDetailed allNewsDetailed = newsMapper.selectById(id);
-
-		try {
-			String resultString = objectMapper.writeValueAsString(allNewsDetailed);
-			System.out.println(resultString);
-			return resultString;
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			return "";
-		}
-
-	}
-
 
 	// 條件查詢(上架的)
 	@ResponseBody
@@ -76,38 +58,53 @@ public class NewsSearchController {
 //		map.put("release_state",0);
 		return newsService.getNewsManyByPublic(pageNum);
 	}
-	
-	
-	//條件查詢(上架的 TAG)
+
+	// 條件查詢(上架的 TAG)
 	@ResponseBody
 	@GetMapping(value = "/search/getNewsManyByTag/{tag}/{pageNum}")
-	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByTag(@PathVariable("pageNum") Long pageNum, @PathVariable("tag") String tag){
-	
-        return newsService.getNewsManyByTag(pageNum, tag);
+	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByTag(@PathVariable("pageNum") Long pageNum,
+			@PathVariable("tag") String tag) {
+
+		return newsService.getNewsManyByTag(pageNum, tag);
 	}
-	
-	//條件查詢(所有 TAG)
+
+	// 單筆查詢 ID
+	@ResponseBody
+	@PostMapping(value = "/search/getNewsById")
+	public String getNewsById(@RequestParam String id) {
+		AllNewsDetailed allNewsDetailed = newsMapper.selectById(id);
+		try {
+			String resultString = objectMapper.writeValueAsString(allNewsDetailed);
+			System.out.println(resultString);
+			return resultString;
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
+
+	// 條件查詢(所有 TAG)
 	@ResponseBody
 	@GetMapping(value = "/search/getNewsManyAllDownByTag/{tag}/{pageNum}")
-	public ResponseData<IPage<AllNewsDetailed>> getNewsAllManyByTag(@PathVariable("pageNum") Long pageNum, @PathVariable("tag") String tag){
-		
-        return newsService.getNewsAllManyByTag(pageNum, tag);
-	}
-	
-	
+	public ResponseData<IPage<AllNewsDetailed>> getNewsAllManyByTag(@PathVariable("pageNum") Long pageNum,
+			@PathVariable("tag") String tag) {
 
-//---------------------新增**
+		return newsService.getNewsAllManyByTag(pageNum, tag);
+	}
+
+//---------------------新增------------------------
+
 	// 新增單筆(for表單)-
-    @PostMapping(value = "/creatOneNews")
-    public String creatOneNews(AllNewsDetailed allNewsDetailed) {
-    	System.err.println(allNewsDetailed);
+	@PostMapping(value = "/creatOneNews")
+	public String creatOneNews(AllNewsDetailed allNewsDetailed) {
+		System.err.println(allNewsDetailed);
 		int count = newsMapper.insert(allNewsDetailed);
 		if (count >= 1) {
 			return "redirect:/indexAdmin";
 		} else {
 			return "redirect:/indexAdmin";
-		}      
-    }
+		}
+	}
 
 	// 新增單筆
 	@PostMapping(value = "/create/setNews")
@@ -125,18 +122,19 @@ public class NewsSearchController {
 		}
 	}
 
-//--------------修改
+//---------------------------修改-----------------------
+
 	// 修改單筆(for表單)
-    @PostMapping(value = "/modifyOneNews")
-    public String modifyOneNews( AllNewsDetailed allNewsDetailed) {
-    	int count = newsMapper.updateById(allNewsDetailed);
+	@PostMapping(value = "/modifyOneNews")
+	public String modifyOneNews(AllNewsDetailed allNewsDetailed) {
+		int count = newsMapper.updateById(allNewsDetailed);
 		if (count >= 1) {
 			return "redirect:/indexAdmin";
 		} else {
 			return "redirect:/indexAdmin";
-		}      
-    }
-	
+		}
+	}
+
 	// 修改單筆
 	@PostMapping(value = "/update/updateNews")
 	@ResponseBody
@@ -155,7 +153,7 @@ public class NewsSearchController {
 		}
 	}
 
-	// 0 = 公開     1 = 下架.刪除(軟刪除)      
+	// 0 = 公開 1 = 下架.刪除(軟刪除)
 	@PostMapping(value = "/update/stateModify")
 	@ResponseBody
 	public ResponseData stateModifyNewsById(@RequestParam Integer id, @RequestParam Integer releaseState) {
@@ -163,20 +161,12 @@ public class NewsSearchController {
 
 	}
 
-//--------------刪除
+//--------------------------刪除------------------------
 	// 刪除單筆(真實移除)
 	@PostMapping(value = "/delete/deleteNews")
 	@ResponseBody
-	public String deleteNewsById(@RequestParam Integer id) {
-		AllNewsDetailed allNewsDetailed = new AllNewsDetailed();
-		allNewsDetailed.setId(id);
-		int count = newsMapper.deleteById(id);
-		if (count >= 1) {
-			return "刪除成功";
-		} else {
-
-			return "查無此ID";
-		}
+	public ResponseData deleteNewsById(@RequestParam Integer id) {
+		return newsService.deleteNewsById(id);
 	}
 
 	// 刪除多筆(真實移除)
@@ -202,8 +192,7 @@ public class NewsSearchController {
 			return "查無此條件";
 		}
 	}
-	
-	
+
 //	// 查詢多個BY ID
 //	@ResponseBody
 //	@PostMapping(value = "/search/getNewsManyById/{pageNum}")
@@ -213,7 +202,6 @@ public class NewsSearchController {
 //		System.out.println("idList  "+idList);
 //		return newsService.getNewsManyById(pageNum, idList);
 //	}
-
 
 //	@ResponseBody
 //	@PostMapping(value = "/getNewsByTime")
