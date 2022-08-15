@@ -97,7 +97,7 @@ pid-file=/var/run/mariadb/mariadb.pid<br />
 # 修改
 ![image](https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/%E4%BF%AE%E6%94%B9.png)
 # 上下架
-![image](https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/002.png)
+![image](https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/%E5%88%AA%E9%99%A4.jpg)
 # 首頁
 ![image](https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/001.jpg)
 # 內容
