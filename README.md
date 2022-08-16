@@ -32,7 +32,7 @@
 
 5.  docker-compose up -d    **啟動 dokcer-compose**
 
-**如果出現以下問題<br />
+**如出現以下問題<br />
 ERROR: for mysql  Cannot start service mysql: failed to create shim task: OCI runtime create 
 failed: runc create failed: unable to start container process: error during container init: 
 error mounting "/app/mysql/conf/my.cnf" to rootfs at "/etc/my.cnf": mount /app/mysql/conf/my.
