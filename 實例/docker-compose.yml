@@ -7,7 +7,7 @@ services:
       - "8080:8080"
     volumes:
         - ./opt:/opt
-        - /app/java/application.yml:/porperties/application.yml
+        - ./../application.yml:/porperties/application.yml
     command: /bin/bash -c "java -jar /opt/news.jar --spring.config.location=/porperties/application.yml"
     networks: 
       - tony_net 
@@ -24,13 +24,11 @@ services:
     ports:
        - "3306:3306"
     volumes:
-       - /app/mysql/db:/var/lib/mysql
-       - /app/mysql/conf/my.cnf:/etc/my.cnf
-       - /app/mysql/init:/docker-entrypoint-initdb.d
+       - ./mysql/db:/var/lib/mysql
+       - ./mysql/conf/my.cnf:/etc/my.cnf
+       - ./mysql/init:/docker-entrypoint-initdb.d
     networks:
       - tony_net
-    command:     
-          --default-authentication-plugin=mysql_native_password #解决外部无法访问
  
 networks: 
    tony_net: 

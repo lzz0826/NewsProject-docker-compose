@@ -32,7 +32,7 @@
 
 5.  docker-compose up -d    **啟動 dokcer-compose**
 
-**會出現以下訊息  
+**如出現以下問題<br />
 ERROR: for mysql  Cannot start service mysql: failed to create shim task: OCI runtime create 
 failed: runc create failed: unable to start container process: error during container init: 
 error mounting "/app/mysql/conf/my.cnf" to rootfs at "/etc/my.cnf": mount /app/mysql/conf/my.
@@ -97,7 +97,7 @@ pid-file=/var/run/mariadb/mariadb.pid<br />
 # 修改
 ![image](https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/%E4%BF%AE%E6%94%B9.png)
 # 上下架
-![image](https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/002.png)
+![image](https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/%E5%88%AA%E9%99%A4.jpg)
 # 首頁
 ![image](https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/001.jpg)
 # 內容
