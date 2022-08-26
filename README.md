@@ -28,11 +28,6 @@
 
 3.  輸入 docker-compose up -d 啟動
 
-4.  第一次啟動時 Spring boot - flyway 會先丟資料到 mysql 後停止
-
-5.  docker-compose up -d  再次啟動
-
-
 如成功啟動: 網址 : 宿主機IP:8080  
 
 # 範例圖:
