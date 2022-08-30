@@ -33,7 +33,6 @@ public class AccountController {
 		List<Account> account = accountMapper.selectList(null);
 		try {
 			String resultString = objectMapper.writeValueAsString(account);
-			System.out.println(resultString);
 			return resultString;
 
 		} catch (JsonProcessingException e) {
@@ -52,7 +51,6 @@ public class AccountController {
 		
 		try {
 			String resultString = objectMapper.writeValueAsString(account);
-			System.out.println(resultString);
 			return resultString;
 
 		} catch (JsonProcessingException e) {
@@ -70,7 +68,6 @@ public class AccountController {
 		
 		try {
 			String resultString = objectMapper.writeValueAsString(account);
-			System.out.println(resultString);
 			return resultString;
 
 		} catch (JsonProcessingException e) {
@@ -80,27 +77,7 @@ public class AccountController {
 		
 	}
 
-//	@ResponseBody
-//	@PostMapping(value = "/getNewsByTime")
-//	public String getNewsByTime(@RequestParam String startTime,@RequestParam String endTime) {
-//		
-//		try {
-//			String resultString = objectMapper.writeValueAsString(newsSearchService.getNewsByTime(startTime, endTime));
-//			System.out.println(resultString);
-//			return resultString;
-//
-//		} catch (JsonProcessingException e) {
-//			e.printStackTrace();
-//			return "";
-//		}
-//		
-//	}
-	
-	
-	
-	
-	
-	
-	
+
+
 
 }

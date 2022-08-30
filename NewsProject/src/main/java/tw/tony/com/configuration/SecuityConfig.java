@@ -30,8 +30,6 @@ public class SecuityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 
-//	@Autowired
-//	private PersonnelLogoutSuccessHandler personnelSuccessHandler;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -50,9 +48,6 @@ public class SecuityConfig extends WebSecurityConfigurerAdapter {
 		http
 		
 		.csrf().disable();
-//		.sessionManagement()
-//		.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//		.maximumSessions(1);
 
 	    http.authorizeRequests()
 	    		.antMatchers("/indexAdmin").hasRole("MDMIN")
@@ -70,7 +65,6 @@ public class SecuityConfig extends WebSecurityConfigurerAdapter {
 	            .logout()
 	            .logoutUrl("/perform_logout")
 	            .logoutSuccessUrl("/login")
-//	            .logoutSuccessHandler(personnelSuccessHandler)
 	            .permitAll();
 
 		http.headers().frameOptions().sameOrigin();

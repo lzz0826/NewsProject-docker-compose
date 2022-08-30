@@ -46,7 +46,6 @@ public class NewsSearchController {
 	@ResponseBody
 	@GetMapping(value = "/search/getAllNews/{pageNum}")
 	public ResponseData<IPage<AllNewsDetailed>> getAllNewsDetailed(@PathVariable("pageNum") Long pageNum) {
-		System.out.println("pageNum  " + pageNum);
 		return newsService.getAllNewsDetailed(pageNum);
 	}
 
@@ -75,7 +74,6 @@ public class NewsSearchController {
 		AllNewsDetailed allNewsDetailed = newsMapper.selectById(id);
 		try {
 			String resultString = objectMapper.writeValueAsString(allNewsDetailed);
-			System.out.println(resultString);
 			return resultString;
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
@@ -193,30 +191,5 @@ public class NewsSearchController {
 		}
 	}
 
-//	// 查詢多個BY ID
-//	@ResponseBody
-//	@PostMapping(value = "/search/getNewsManyById/{pageNum}")
-//	public ResponseData<IPage<AllNewsDetailed>> getNewsManyById(@PathVariable("pageNum") Long pageNum, @RequestParam List<Integer> idList) {
-//		
-//		System.out.println("pageNum  "+pageNum);
-//		System.out.println("idList  "+idList);
-//		return newsService.getNewsManyById(pageNum, idList);
-//	}
-
-//	@ResponseBody
-//	@PostMapping(value = "/getNewsByTime")
-//	public String getNewsByTime(@RequestParam String startTime,@RequestParam String endTime) {
-//		
-//		try {
-//			String resultString = objectMapper.writeValueAsString(newsSearchService.getNewsByTime(startTime, endTime));
-//			System.out.println(resultString);
-//			return resultString;
-//
-//		} catch (JsonProcessingException e) {
-//			e.printStackTrace();
-//			return "";
-//		}
-//		
-//	}
 
 }

@@ -45,10 +45,8 @@ public class NewsService {
 
 	// 查整張表
 	public ResponseData<IPage<AllNewsDetailed>> getAllNewsDetailed(Long pageNum) {
-		System.out.println("pageNum  "+pageNum);
         IPage<AllNewsDetailed> page = new Page<>(pageNum, 5);
         newsMapper.selectPage(page, null);
-        System.out.println(JSON.toJSONString(page));
 
 		return responseData(page);
 	}
@@ -62,7 +60,6 @@ public class NewsService {
 		}
 		wrapper.eq("id", idList);
 		newsMapper.selectPage(page, wrapper);
-		System.out.println(JSON.toJSONString(page));
 		return responseData(page);
 	}
 	
@@ -74,7 +71,6 @@ public class NewsService {
 		wrapper.eq("release_state", 0);
         IPage<AllNewsDetailed> page = new Page<>(pageNum, 5);
         newsMapper.selectPage(page, wrapper);
-        System.out.println(JSON.toJSONString(page));
         
         return responseData(page);
 	}
@@ -87,7 +83,6 @@ public class NewsService {
 		wrapper.eq("release_state", 0).eq("tag", tag);
         IPage<AllNewsDetailed> page = new Page<>(pageNum, 5);
         newsMapper.selectPage(page, wrapper);
-        System.out.println(JSON.toJSONString(page));
         
         return responseData(page);
 	}
@@ -99,7 +94,6 @@ public class NewsService {
 		wrapper.eq("tag", tag);
         IPage<AllNewsDetailed> page = new Page<>(pageNum, 5);
         newsMapper.selectPage(page, wrapper);
-        System.out.println(JSON.toJSONString(page));
         return responseData(page);
 	}
 	
@@ -107,7 +101,6 @@ public class NewsService {
 	
 	// 0 = 公開     1 = 下架  2 =刪除(軟刪除)      
 	public ResponseData stateModifyNewsById(@RequestParam Integer id, @RequestParam Integer releaseState) {
-		System.out.println("sdfds");
 		AllNewsDetailed allNewsDetailed = new AllNewsDetailed();
 		allNewsDetailed.setId(id);
 		allNewsDetailed.setReleaseState(releaseState);
@@ -131,7 +124,6 @@ public class NewsService {
 	// 刪除單筆(真實移除)
 	public ResponseData deleteNewsById(Integer id) {
 		ResponseData responseData = new ResponseData();
-		System.out.println("id:  "+id);
 		AllNewsDetailed allNewsDetailed = new AllNewsDetailed();
 		allNewsDetailed.setId(id);
 		int count = newsMapper.deleteById(id);
@@ -143,30 +135,6 @@ public class NewsService {
 			return responseData;
 		}
 	}
-	
-	
-//	// 單筆查詢 ID
-//	public ResponseData<IPage<AllNewsDetailed>> getNewsById(Long pageNum, Long id) {
-//		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>();
-//		wrapper.eq("id", id);
-//		IPage<AllNewsDetailed> page = new Page<>(pageNum,10);
-//		newsMapper.selectPage(page, wrapper);
-//		System.out.println(JSON.toJSONString(page));
-//		return  responseData(page);
-//
-//	}
-//	
-//	// 單筆查詢 ID
-//	public ResponseData<IPage<AllNewsDetailed>> getNewsById(Long pageNum, Long id) {
-//		QueryWrapper<AllNewsDetailed> wrapper = new QueryWrapper<>();
-//		wrapper.eq("id", id);
-//		IPage<AllNewsDetailed> page = new Page<>(pageNum,10);
-//		newsMapper.selectPage(page, wrapper);
-//		System.out.println(JSON.toJSONString(page));
-//		return  responseData(page);
-//
-//	}
-//	
 	
 	
 }
