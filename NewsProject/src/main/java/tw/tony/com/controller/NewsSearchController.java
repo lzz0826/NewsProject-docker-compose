@@ -53,8 +53,6 @@ public class NewsSearchController {
 	@ResponseBody
 	@GetMapping(value = "/search/getNewsManyByPublic/{pageNum}")
 	public ResponseData<IPage<AllNewsDetailed>> getNewsManyByPublic(@PathVariable("pageNum") Long pageNum) {
-//		Map<String, Object> map =new HashMap<String, Object>();
-//		map.put("release_state",0);
 		return newsService.getNewsManyByPublic(pageNum);
 	}
 
