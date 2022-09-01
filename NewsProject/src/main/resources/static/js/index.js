@@ -116,16 +116,8 @@ $(function() {
         $("#newsMain").empty(); // 查詢時清空前次紀錄
         $("#pages").empty();
         let page = 1;
-
-        try {
-            tag = window.location.search.toString().split("=")[1].split("&")[1];
-        } catch (e) {
-            tag = null;
-        }
-        if (tag == null) {
-
-            tag = '運動';
-        }
+        tag = '運動';
+        
         tagPage(page, tag);
     });
 
@@ -134,16 +126,8 @@ $(function() {
         $("#newsMain").empty(); // 查詢時清空前次紀錄
         $("#pages").empty();
         let page = 1;
-
-        try {
-            tag = window.location.search.toString().split("=")[1].split("&")[1];
-        } catch (e) {
-            tag = null;
-        }
-        if (tag == null) {
-
-            tag = '政治';
-        }
+         tag = '政治';
+        
         tagPage(page, tag);
     });
 
@@ -152,16 +136,7 @@ $(function() {
         $("#newsMain").empty(); // 查詢時清空前次紀錄
         $("#pages").empty();
         let page = 1;
-
-        try {
-            tag = window.location.search.toString().split("=")[1].split("&")[1];
-        } catch (e) {
-            tag = null;
-        }
-        if (tag == null) {
-
-            tag = '遊戲';
-        }
+        tag = '遊戲';
         tagPage(page, tag);
     });
 
@@ -171,16 +146,7 @@ $(function() {
         $("#newsMain").empty(); // 查詢時清空前次紀錄
         $("#pages").empty();
         let page = 1;
-
-        try {
-            tag = window.location.search.toString().split("=")[1].split("&")[1];
-        } catch (e) {
-            tag = null;
-        }
-        if (tag == null) {
-
-            tag = '娛樂';
-        }
+         tag = '娛樂';
         tagPage(page, tag);
     });
 
