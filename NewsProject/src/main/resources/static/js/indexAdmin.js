@@ -1,6 +1,5 @@
  // 下架
  function takeDown(id) {
-     // let id = $("#takeDown").val();
      $.ajax({
          url: '/api/News/update/stateModify',
          type: 'POST',
@@ -21,7 +20,6 @@
 
  // 上架
  function onTheShelf(id) {
-     // let id = $("#takeDown").val();
      $.ajax({
          url: '/api/News/update/stateModify',
          type: 'POST',
@@ -43,7 +41,6 @@
 
  // 軟刪除
  function falseDel(id) {
-     // let id = $("#takeDown").val();
      $.ajax({
          url: '/api/News/update/stateModify',
          type: 'POST',
@@ -65,7 +62,6 @@
 
  // 真實刪除
  function delNewsById(id) {
-     // let id = $("#takeDown").val();
      $.ajax({
          url: '/api/News/delete/deleteNews',
          type: 'POST',
@@ -129,7 +125,6 @@
                  let tbodyPage = $("#pages");
                  newRecord = res['data']['records'];
                  pageRecord = res['data'];
-                 // console.log(res[0].releaseState);
                  console.log(newRecord);
                  console.log(pageRecord.size);
                  console.log(res.magmessage);
@@ -145,7 +140,6 @@
                      div =
                          '<div class="news-list-item clearfix">' +
                          '<div class="col-xs-10">' +
-                         //  '<h3>' + res[i].title + '</h3>'+
                          '<a href="newsAdmin?no=' + newRecord[i].id + '" class="title">' + newRecord[i].title + '(詳細內容)' + '</a>' +
                          '<div>' + '標籤:' + newRecord[i].tag + '</div>' +
                          '<div class="info">' +
@@ -190,7 +184,6 @@
                  let tbodyPage = $("#pages");
                  newRecord = res['data']['records'];
                  pageRecord = res['data'];
-                 // console.log(res[0].releaseState);
                  console.log(newRecord);
                  console.log(pageRecord.size);
                  console.log(res.magmessage);
@@ -206,7 +199,6 @@
                      div =
                          '<div class="news-list-item clearfix">' +
                          '<div class="col-xs-10">' +
-                         //  '<h3>' + res[i].title + '</h3>'+
                          '<a href="newsAdmin?no=' + newRecord[i].id + '" class="title">' + newRecord[i].title + '(詳細內容)' + '</a>' +
                          '<div>' + '標籤:' + newRecord[i].tag + '</div>' +
                          '<div class="info">' +
@@ -246,15 +238,12 @@
      $("#sports").click(function() {
          $("#newsMain").empty(); // 查詢時清空前次紀錄
          $("#pages").empty();
-         let page = window.location.search.toString().split("=")[1];
+         let page = 1;
 
          try {
              tag = window.location.search.toString().split("=")[1].split("&")[1];
          } catch (e) {
              tag = null;
-         }
-         if (page == null) {
-             page = 1;
          }
          if (tag == null) {
 
@@ -267,15 +256,12 @@
      $("#politics").click(function() {
          $("#newsMain").empty(); // 查詢時清空前次紀錄
          $("#pages").empty();
-         let page = window.location.search.toString().split("=")[1];
+         let page = 1;
 
          try {
              tag = window.location.search.toString().split("=")[1].split("&")[1];
          } catch (e) {
              tag = null;
-         }
-         if (page == null) {
-             page = 1;
          }
          if (tag == null) {
 
@@ -288,15 +274,12 @@
      $("#game").click(function() {
          $("#newsMain").empty(); // 查詢時清空前次紀錄
          $("#pages").empty();
-         let page = window.location.search.toString().split("=")[1];
+         let page = 1;
 
          try {
              tag = window.location.search.toString().split("=")[1].split("&")[1];
          } catch (e) {
              tag = null;
-         }
-         if (page == null) {
-             page = 1;
          }
          if (tag == null) {
 
@@ -310,15 +293,12 @@
      $("#entertainment").click(function() {
          $("#newsMain").empty(); // 查詢時清空前次紀錄
          $("#pages").empty();
-         let page = window.location.search.toString().split("=")[1];
+         let page = 1;
 
          try {
              tag = window.location.search.toString().split("=")[1].split("&")[1];
          } catch (e) {
              tag = null;
-         }
-         if (page == null) {
-             page = 1;
          }
          if (tag == null) {
 

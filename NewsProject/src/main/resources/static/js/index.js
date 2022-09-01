@@ -27,9 +27,6 @@ $(function() {
 
             tagPage(page, tag);
         }
-
-        // let page = window.location.search.toString().split("&")[0].split('=')[1]
-        // let tag = window.location.search.toString().split("&")[1].split('=')[1]
     });
     var newsList = function(page) {
         $.ajax({
@@ -40,7 +37,6 @@ $(function() {
                 let tbodyPage = $("#pages");
                 newRecord = res['data']['records'];
                 pageRecord = res['data'];
-                // console.log(res[0].releaseState);
                 console.log(newRecord);
                 console.log(pageRecord.size);
                 console.log(res.magmessage);
@@ -50,7 +46,6 @@ $(function() {
                     div =
                         '<div class="news-list-item clearfix">' +
                         '<div class="col-xs-12">' +
-                        //  '<h3>' + res[i].title + '</h3>'+
                         '<a href="news?no=' + newRecord[i].id + '" class="title">' + newRecord[i].title + '</a>' +
                         '<div>' + '標籤:' + newRecord[i].tag + '</div>' +
                         '<div class="info">' +
@@ -84,7 +79,6 @@ $(function() {
                 let tbodyPage = $("#pages");
                 newRecord = res['data']['records'];
                 pageRecord = res['data'];
-                // console.log(res[0].releaseState);
                 console.log(newRecord);
                 console.log(pageRecord.size);
                 console.log(res.magmessage);
@@ -93,7 +87,6 @@ $(function() {
                     div =
                         '<div class="news-list-item clearfix">' +
                         '<div class="col-xs-12">' +
-                        //  '<h3>' + res[i].title + '</h3>'+
                         '<a href="news?no=' + newRecord[i].id + '" class="title">' + newRecord[i].title + '</a>' +
                         '<div>' + '標籤:' + newRecord[i].tag + '</div>' +
                         '<div class="info">' +
@@ -122,15 +115,12 @@ $(function() {
     $("#sports").click(function() {
         $("#newsMain").empty(); // 查詢時清空前次紀錄
         $("#pages").empty();
-        let page = window.location.search.toString().split("=")[1];
+        let page = 1;
 
         try {
             tag = window.location.search.toString().split("=")[1].split("&")[1];
         } catch (e) {
             tag = null;
-        }
-        if (page == null) {
-            page = 1;
         }
         if (tag == null) {
 
@@ -143,15 +133,12 @@ $(function() {
     $("#politics").click(function() {
         $("#newsMain").empty(); // 查詢時清空前次紀錄
         $("#pages").empty();
-        let page = window.location.search.toString().split("=")[1];
+        let page = 1;
 
         try {
             tag = window.location.search.toString().split("=")[1].split("&")[1];
         } catch (e) {
             tag = null;
-        }
-        if (page == null) {
-            page = 1;
         }
         if (tag == null) {
 
@@ -164,15 +151,12 @@ $(function() {
     $("#game").click(function() {
         $("#newsMain").empty(); // 查詢時清空前次紀錄
         $("#pages").empty();
-        let page = window.location.search.toString().split("=")[1];
+        let page = 1;
 
         try {
             tag = window.location.search.toString().split("=")[1].split("&")[1];
         } catch (e) {
             tag = null;
-        }
-        if (page == null) {
-            page = 1;
         }
         if (tag == null) {
 
@@ -186,15 +170,12 @@ $(function() {
     $("#entertainment").click(function() {
         $("#newsMain").empty(); // 查詢時清空前次紀錄
         $("#pages").empty();
-        let page = window.location.search.toString().split("=")[1];
+        let page = 1;
 
         try {
             tag = window.location.search.toString().split("=")[1].split("&")[1];
         } catch (e) {
             tag = null;
-        }
-        if (page == null) {
-            page = 1;
         }
         if (tag == null) {
 

@@ -28,8 +28,8 @@
     </div>
     <div class="container">
         <div class="col-xs-12">
-          <div id = "newsMain">
-          </div>
+            <div id="newsMain">
+            </div>
         </div>
     </div>
     <div class="footer">
@@ -39,52 +39,47 @@
 
     <script src="js/jquery-3.2.1.min.js"></script>
     <script>
-      let sseref= window.location.search.toString().split("=")[1];
-      console.log(sseref);
+        let sseref = window.location.search.toString().split("=")[1];
+        console.log(sseref);
 
-      $(document).ready(function() {
-        $("#newsMain").empty(); // 查詢時清空前次紀錄
-        newsContent(sseref);
-      });
-      var newsContent =  function(id){
+        $(document).ready(function() {
+            $("#newsMain").empty(); // 查詢時清空前次紀錄
+            newsContent(sseref);
+        });
+        var newsContent = function(id) {
             $.ajax({
-              url: 'api/News/search/getNewsById',
-                  type: 'post',
-                  dataType: 'json',
-                  data: {
-                      "id": id
-                  },
-                  success: function(res) {
+                url: 'api/News/search/getNewsById',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    "id": id
+                },
+                success: function(res) {
                     console.log(res);
                     let tbody = $("#newsMain");
                     var div;
-                          div =
-                          '<div class="news-list-item clearfix">'+
-                           '<div class="col-xs-12">'+
-                            //  '<h3>' + res[i].title + '</h3>'+
-                               '<h3>'+ res.title +'</h3>'+
-                               '<div>'+'標籤:'+res.tag+'</div>'+
-                               '<p>'+res.content+'</p>'+
-                               '<div class="info">'+
-                                   '<span>'+'ID:' + res.id +'</span>'+
-                                   '<span>'+'作者:' + res.author +'</span>'+
-                                   '<span>'+'創建時間:'+ res.createTime +'</span>'+
-                               '</div>'+
-                           '</div>'+
-                        '</div>';        
-                        tbody.append('<div>' + div + '</div>');    
-                    
-                  },
-                  error: function(res) {
-                      console.log(res);
-                  }
-              });
+                    div =
+                        '<div class="news-list-item clearfix">' +
+                        '<div class="col-xs-12">' +
+                        '<h3>' + res.title + '</h3>' +
+                        '<div>' + '標籤:' + res.tag + '</div>' +
+                        '<p>' + res.content + '</p>' +
+                        '<div class="info">' +
+                        '<span>' + 'ID:' + res.id + '</span>' +
+                        '<span>' + '作者:' + res.author + '</span>' +
+                        '<span>' + '創建時間:' + res.createTime + '</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                    tbody.append('<div>' + div + '</div>');
 
-          }
+                },
+                error: function(res) {
+                    console.log(res);
+                }
+            });
 
-          
-
-
+        }
     </script>
 </body>
 
